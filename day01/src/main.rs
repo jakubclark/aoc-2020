@@ -25,11 +25,12 @@ fn part2(nums: &HashSet<u64>) -> u64 {
 }
 
 fn main() {
-    let mut nums = HashSet::new();
-    let input = include_str!("../input.txt");
-    for line in input.lines() {
-        nums.insert(line.parse().unwrap());
-    }
+    let nums = include_str!("../input.txt")
+        .lines()
+        .into_iter()
+        .map(str::parse)
+        .map(Result::unwrap)
+        .collect();
     let part1 = part1(&nums);
     println!("Part 1 solution: {}", part1);
     let part2 = part2(&nums);
