@@ -39,15 +39,9 @@ impl Grid {
         }
     }
 
-    fn count_trees_for_traversal(
-        &self,
-        starting_x: usize,
-        starting_y: usize,
-        x_step_size: usize,
-        y_step_size: usize,
-    ) -> u32 {
-        let mut current_x = starting_x;
-        let mut current_y = starting_y;
+    fn count_trees_for_traversal(&self, x_step_size: usize, y_step_size: usize) -> u32 {
+        let mut current_x = 0;
+        let mut current_y = 0;
         let height = self.height();
         let width = self.width();
         let mut count = 0;
@@ -68,8 +62,16 @@ fn main() {
 
     let grid = Grid::from(input);
 
-    let part1 = grid.count_trees_for_traversal(0, 0, 3, 1);
+    let part1 = grid.count_trees_for_traversal(3, 1);
     println!("Part 1 solution: {}", part1);
+
+    let inputs = vec![(1, 1), (3, 1), (5, 1), (7, 1), (1, 2)];
+    let part2: u32 = inputs
+        .into_iter()
+        .map(|input| grid.count_trees_for_traversal(input.0, input.1))
+        .product();
+
+    println!("Part 2 solution: {}", part2);
 }
 
 #[test]
@@ -87,6 +89,31 @@ fn part1_works() {
 .#..#...#.#";
 
     let grid = Grid::from(input);
-    let encountered_trees = grid.count_trees_for_traversal(0, 0, 3, 2);
-    assert_eq!(7, encountered_trees);
+    let encountered_trees = grid.count_trees_for_traversal(3, 1);
+    assert_eq!(7, encountered_trees)
+}
+
+#[test]
+fn part2_works() {
+    let input = r"..##.......
+#...#...#..
+.#....#..#.
+..#.#...#.#
+.#...##..#.
+..#.##.....
+.#.#.#....#
+.#........#
+#.##...#...
+#...##....#
+.#..#...#.#";
+    let grid = Grid::from(input);
+
+    let inputs = vec![(1, 1), (3, 1), (5, 1), (7, 1), (1, 2)];
+
+    let product: u32 = inputs
+        .into_iter()
+        .map(|input| grid.count_trees_for_traversal(input.0, input.1))
+        .product();
+
+    assert_eq!(336, product);
 }
