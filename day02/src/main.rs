@@ -1,7 +1,7 @@
 fn valid_count(line: &str) -> bool {
     let mut parts = line.split_whitespace();
 
-    let mut range_parts = parts.next().unwrap().split("-");
+    let mut range_parts = parts.next().unwrap().split('-');
     let min: usize = range_parts.next().unwrap().parse().unwrap();
     let max: usize = range_parts.next().unwrap().parse().unwrap();
     let char_to_check = parts.next().unwrap().chars().next().unwrap();
@@ -26,7 +26,7 @@ fn part1(input: &str) -> usize {
 fn valid_position(line: &str) -> bool {
     let mut parts = line.split_whitespace();
 
-    let mut range_parts = parts.next().unwrap().split("-");
+    let mut range_parts = parts.next().unwrap().split('-');
     let first: usize = range_parts.next().unwrap().parse().unwrap();
     let second: usize = range_parts.next().unwrap().parse().unwrap();
     let char_to_check = parts.next().unwrap().chars().next().unwrap().to_string();
